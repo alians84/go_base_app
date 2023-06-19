@@ -2,6 +2,7 @@ package userController
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"pet-projectGoApi/app/model"
 )
 
 type UserController struct {
@@ -29,4 +30,10 @@ func (controller *UserController) GetItem(c *fiber.Ctx) error {
 	User.Id = 1
 	User.Name = "name"
 	return c.JSON(User)
+}
+
+func (controller *UserController) GetMe(c *fiber.Ctx) error {
+	user := c.Locals("user").(model.UserResponse)
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"user": user}})
 }
