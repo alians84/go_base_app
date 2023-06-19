@@ -1,0 +1,83 @@
+basePath: /
+definitions:
+  model.HTTPError:
+    properties:
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  userController.GetItemRequest:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: youremail@provider.com
+    name: API Support
+  description: This is a sample swagger for Fiber
+  title: Fiber Example API
+  version: "1.0"
+paths:
+  /api/auth:
+    get:
+      consumes:
+      - application/json
+      description: Get an item by its ID
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+      summary: Get an item
+      tags:
+      - Item
+  /api/users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get an item by its ID
+      operationId: get-item-by-int
+      parameters:
+      - description: Item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userController.GetItemRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.HTTPError'
+      summary: Get an item
+      tags:
+      - Item
+swagger: "2.0"
